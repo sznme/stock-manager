@@ -1,32 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<html lang="en">
-<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Stock Manager Dashboard</title>
-  <!-- Removed duplicate jQuery inclusion -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <style>
-    body {
-      display: flex;
-      margin-left: 0;  /* Ensure no margin is applied at the start */
-    }
-    .transition-margin {
-      margin-left: 0;  /* Default margin for main content */
-      transition: margin-left 0.3s; /* Smooth transition */
-    }
-    .ml-250 {
-      margin-left: 250px; /* Adjust margin when sidebar is active */
-    }
-  </style>
   <style>
     .sidebar {
       width: 250px;
       position: fixed;
       left: -250px;
-      transition: left 0.3s, margin-left 0.3s;
       top: 0;
       height: 100%;
       background: #f9f9f9;
@@ -51,17 +33,20 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 p-6">
-  <div class="max-w-full mx-auto transition-margin ml-0">
-    <!-- Removed sidebar toggle buttons -->
+  <div class="max-w-full mx-auto">
+    <button class="toggle-btn" onclick="toggleSidebar()">Toggle Sidebar</button>
     <h1 class="text-2xl font-semibold mb-4">Stock Manager Dashboard</h1>
-    <div class="sidebar" id="sidebar" onclick="closeSidebar(event)">
-    <button class="close-btn" onclick="closeSidebar()">X</button>
 
     <!-- Search Bar -->
-    <!-- Sidebar removed -->
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Warehouses</a></li>
+            <li><a href="#">Users</a></li>
+        </ul>
+    </div>
     <div class="mb-4">
       <input
-      class="ml-250"
         type="text"
         placeholder="Search by Product Name or SKU"
         class="w-full p-3 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -86,10 +71,10 @@
           </tr>
         </thead>
         <tbody></tbody>
-          <!-- Example Variable Product Rows -->
-          <tr class="hover:bg-gray-50 border-t" onclick="toggleRow(this)">
+          <!-- Example Variable Product Row -->
+          <tr class="hover:bg-gray-50 border-t">
             <td class="p-3 align-middle text-center">
-              <button class="text-blue-600 font-bold expand-btn">+</button>
+              <button class="text-blue-600 font-bold">+</button>
             </td>
             <td class="p-3 align-middle">
               <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded" />
@@ -100,105 +85,9 @@
             <td class="p-3 text-center align-middle">
               <input type="checkbox" class="w-5 h-5" />
             </td>
-          </tr>
-
-          <tr class="hidden bg-gray-50 border-t">
-            <td></td>
-            <td class="p-3 align-middle">
-              <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded" />
-            </td>
-            <td class="p-3 align-middle pl-6">— Fruity Pack 30mL</td>
-            <td class="p-3 align-middle font-mono">FRTY123-30</td>
-            <td class="p-3 align-middle">012345678902</td>
-            <td class="p-3 text-center align-middle">
-              <input type="checkbox" class="w-5 h-5" checked />
-            </td>
-          </tr>
-
-          <tr class="hover:bg-gray-50 border-t" onclick="toggleRow(this)">
-            <td class="p-3 align-middle text-center">
-              <button class="text-blue-600 font-bold expand-btn">+</button>
-            </td>
-            <td class="p-3 align-middle">
-              <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded" />
-            </td>
-            <td class="p-3 align-middle">Minty Fresh Disposable</td>
-            <td class="p-3 align-middle font-mono">MNTY456</td>
-            <td class="p-3 align-middle">012345678905</td>
             <td class="p-3 text-center align-middle">
               <input type="checkbox" class="w-5 h-5" />
             </td>
-          </tr>
-
-          <tr class="hidden bg-gray-50 border-t">
-            <td></td>
-            <td class="p-3 align-middle">
-              <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded" />
-            </td>
-            <td class="p-3 align-middle pl-6">— Minty Fresh 50mg</td>
-            <td class="p-3 align-middle font-mono">MNTY456-50</td>
-            <td class="p-3 align-middle">012345678906</td>
-            <td class="p-3 text-center align-middle">
-              <input type="checkbox" class="w-5 h-5" checked />
-            </td>
-          </tr>
-
-          <!-- Additional product rows with variations -->
-          <tr class="hover:bg-gray-50 border-t" onclick="toggleRow(this)">
-            <td class="p-3 align-middle text-center">
-              <button class="text-blue-600 font-bold expand-btn">+</button>
-            </td>
-            <td class="p-3 align-middle">
-              <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded" />
-            </td>
-            <td class="p-3 align-middle">Berry Blast - 100ml</td>
-            <td class="p-3 align-middle font-mono">BERRY100</td>
-            <td class="p-3 align-middle">012345678910</td>
-            <td class="p-3 text-center align-middle">
-              <input type="checkbox" class="w-5 h-5" />
-            </td>
-          </tr>
-
-          <tr class="hidden bg-gray-50 border-t">
-            <td></td>
-            <td class="p-3 align-middle">
-              <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded" />
-            </td>
-            <td class="p-3 align-middle pl-6">— Berry Blast 60mg</td>
-            <td class="p-3 align-middle font-mono">BERRY100-60</td>
-            <td class="p-3 align-middle">012345678911</td>
-            <td class="p-3 text-center align-middle">
-              <input type="checkbox" class="w-5 h-5" checked />
-            </td>
-          </tr>
-
-          <tr class="hover:bg-gray-50 border-t" onclick="toggleRow(this)">
-            <td class="p-3 align-middle text-center">
-              <button class="text-blue-600 font-bold expand-btn">+</button>
-            </td>
-            <td class="p-3 align-middle">
-              <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded" />
-            </td>
-            <td class="p-3 align-middle">Tropical Punch - 60ml</td>
-            <td class="p-3 align-middle font-mono">TROP100</td>
-            <td class="p-3 align-middle">012345678912</td>
-            <td class="p-3 text-center align-middle">
-              <input type="checkbox" class="w-5 h-5" />
-            </td>
-          </tr>
-
-          <tr class="hidden bg-gray-50 border-t">
-            <td></td>
-            <td class="p-3 align-middle">
-              <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded" />
-            </td>
-            <td class="p-3 align-middle pl-6">— Tropical Punch 30mg</td>
-            <td class="p-3 align-middle font-mono">TROP100-30</td>
-            <td class="p-3 align-middle">012345678913</td>
-            <td class="p-3 text-center align-middle">
-              <input type="checkbox" class="w-5 h-5" checked />
-            </td>
-          </tr>
             <td class="p-3 text-center align-middle">
               <input type="number" value="100" class="w-16 border rounded p-1 text-center" />
             </td>
@@ -211,7 +100,7 @@
           </tr>
 
           <!-- Example Nested Variation Row (Indented) -->
-          <tr class="hover:bg-gray-50 border-t bg-gray-50 hidden">
+          <tr class="hover:bg-gray-50 border-t bg-gray-50">
             <td></td>
             <td class="p-3 align-middle">
               <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded" />
@@ -262,122 +151,7 @@
             </td>
           </tr>
 
-          <!-- Example Variable Product Row 1 -->
-          <tr class="hover:bg-gray-50 border-t" onclick="toggleRow(this)">
-            <td class="p-3 align-middle text-center">
-              <button class="text-blue-600 font-bold">+</button>
-            </td>
-            <td class="p-3 align-middle">
-              <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded" />
-            </td>
-            <td class="p-3 align-middle">Vape Juice - Fruity Pack</td>
-            <td class="p-3 align-middle font-mono">FRTY123</td>
-            <td class="p-3 align-middle">012345678901</td>
-            <td class="p-3 text-center align-middle">
-              <input type="checkbox" class="w-5 h-5" />
-            </td>
-          </tr>
-
-          <tr class="hidden bg-gray-50 border-t">
-            <td></td>
-            <td class="p-3 align-middle">
-              <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded" />
-            </td>
-            <td class="p-3 align-middle pl-6">— Fruity Pack 30mL</td>
-            <td class="p-3 align-middle font-mono">FRTY123-30</td>
-            <td class="p-3 align-middle">012345678902</td>
-            <td class="p-3 text-center align-middle">
-              <input type="checkbox" class="w-5 h-5" checked />
-            </td>
-          </tr>
-
-          <!-- Example Variable Product Row 2 -->
-          <tr class="hover:bg-gray-50 border-t" onclick="toggleRow(this)">
-            <td class="p-3 align-middle text-center">
-              <button class="text-blue-600 font-bold">+</button>
-            </td>
-            <td class="p-3 align-middle">
-              <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded" />
-            </td>
-            <td class="p-3 align-middle">Minty Fresh Disposable</td>
-            <td class="p-3 align-middle font-mono">MNTY456</td>
-            <td class="p-3 align-middle">012345678905</td>
-            <td class="p-3 text-center align-middle">
-              <input type="checkbox" class="w-5 h-5" />
-            </td>
-          </tr>
-
-          <tr class="hidden bg-gray-50 border-t">
-            <td></td>
-            <td class="p-3 align-middle">
-              <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded" />
-            </td>
-            <td class="p-3 align-middle pl-6">— Minty Fresh 50mg</td>
-            <td class="p-3 align-middle font-mono">MNTY456-50</td>
-            <td class="p-3 align-middle">012345678906</td>
-            <td class="p-3 text-center align-middle">
-              <input type="checkbox" class="w-5 h-5" checked />
-            </td>
-          </tr>
-
-          <!-- Example Variable Product Row 3 -->
-          <tr class="hover:bg-gray-50 border-t" onclick="toggleRow(this)">
-            <td class="p-3 align-middle text-center">
-              <button class="text-blue-600 font-bold">+</button>
-            </td>
-            <td class="p-3 align-middle">
-              <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded" />
-            </td>
-            <td class="p-3 align-middle">Berry Blast - 100ml</td>
-            <td class="p-3 align-middle font-mono">BERRY100</td>
-            <td class="p-3 align-middle">012345678910</td>
-            <td class="p-3 text-center align-middle">
-              <input type="checkbox" class="w-5 h-5" />
-            </td>
-          </tr>
-
-          <tr class="hidden bg-gray-50 border-t">
-            <td></td>
-            <td class="p-3 align-middle">
-              <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded" />
-            </td>
-            <td class="p-3 align-middle pl-6">— Berry Blast 60mg</td>
-            <td class="p-3 align-middle font-mono">BERRY100-60</td>
-            <td class="p-3 align-middle">012345678911</td>
-            <td class="p-3 text-center align-middle">
-              <input type="checkbox" class="w-5 h-5" checked />
-            </td>
-          </tr>
-
-          <!-- Example Variable Product Row 4 -->
-          <tr class="hover:bg-gray-50 border-t" onclick="toggleRow(this)">
-            <td class="p-3 align-middle text-center">
-              <button class="text-blue-600 font-bold">+</button>
-            </td>
-            <td class="p-3 align-middle">
-              <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded" />
-            </td>
-            <td class="p-3 align-middle">Tropical Punch - 60ml</td>
-            <td class="p-3 align-middle font-mono">TROP100</td>
-            <td class="p-3 align-middle">012345678912</td>
-            <td class="p-3 text-center align-middle">
-              <input type="checkbox" class="w-5 h-5" />
-            </td>
-          </tr>
-
-          <tr class="hidden bg-gray-50 border-t">
-            <td></td>
-            <td class="p-3 align-middle">
-              <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded" />
-            </td>
-            <td class="p-3 align-middle pl-6">— Tropical Punch 30mg</td>
-            <td class="p-3 align-middle font-mono">TROP100-30</td>
-            <td class="p-3 align-middle">012345678913</td>
-            <td class="p-3 text-center align-middle">
-              <input type="checkbox" class="w-5 h-5" checked />
-            </td>
-          </tr>
-
+          <!-- Repeat more rows as needed for sample -->
         </tbody>
       </table>
     </div>
@@ -398,26 +172,6 @@
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     sidebar.classList.toggle('active');
-    const mainContent = document.querySelector('.transition-margin');
-    const mainContent = document.querySelector('.transition-margin');
-    mainContent.classList.toggle('ml-250');
-   function closeSidebar(event) {
-      event.stopPropagation();
-     event.stopPropagation();
-     const sidebar = document.getElementById('sidebar');
-     sidebar.classList.remove('active');
-     const mainContent = document.querySelector('.transition-margin');
-     mainContent.classList.remove('ml-250');
-    function toggleRow(element) {
-      const row = element.parentNode.parentNode.nextElementSibling;
-      row.classList.toggle('hidden');
-    }
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.toggle('active');
-   function closeSidebar(event) {
-    document.querySelector('.transition-margin').classList.toggle('ml-250');
-       sidebar.classList.remove('active');
-       document.querySelector('.transition-margin').classList.remove('ml-250');
   }
 </script>
 </html>
