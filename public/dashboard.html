@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,7 +37,9 @@
 <body class="bg-gray-50 text-gray-800 p-6">
   <div class="max-w-full mx-auto ml-0 transition-margin">
     <button class="toggle-btn" onclick="toggleSidebar()">Toggle Sidebar</button>
+    <button class="close-btn" onclick="closeSidebar(event)">X</button>
     <h1 class="text-2xl font-semibold mb-4">Stock Manager Dashboard</h1>
+    <div class="sidebar" id="sidebar" onclick="closeSidebar(event)">
     <button class="close-btn" onclick="closeSidebar()">X</button>
 
     <!-- Search Bar -->
@@ -75,7 +78,7 @@
         </thead>
         <tbody></tbody>
           <!-- Example Variable Product Row -->
-          <tr class="hover:bg-gray-50 border-t">
+          <tr class="hover:bg-gray-50 border-t" onclick="toggleRow(this)">
             <td class="p-3 align-middle text-center" onclick="toggleRow(this)">
               <button class="text-blue-600 font-bold expand-btn">+</button>
             </td>
@@ -173,6 +176,20 @@
   </div>
 <script>
   function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
+    const mainContent = document.querySelector('.transition-margin');
+    mainContent.classList.toggle('ml-250');
+   function closeSidebar(event) {
+     event.stopPropagation();
+     const sidebar = document.getElementById('sidebar');
+     sidebar.classList.remove('active');
+     const mainContent = document.querySelector('.transition-margin');
+     mainContent.classList.remove('ml-250');
+    function toggleRow(element) {
+      const row = element.parentNode.parentNode.nextElementSibling;
+      row.classList.toggle('hidden');
+    }
     const sidebar = document.getElementById('sidebar');
     sidebar.classList.toggle('active');
    function closeSidebar(event) {
