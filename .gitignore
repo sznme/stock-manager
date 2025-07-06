@@ -1,0 +1,16 @@
+# Ignore the public directory since it is generated during the build process
+# /public/
+
+# Ignore node_modules directory
+/node_modules/
+
+# Ignore logs
+*.log
+
+# Ignore environment variables
+.env
+
+# Ignore npm debug files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
