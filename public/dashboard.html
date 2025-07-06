@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Stock Manager Dashboard</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Removed jQuery inclusion -->
   <style>
     .menu {
       display: flex;
@@ -245,9 +245,11 @@
     </div>
   </div>
 <script>
-  function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.toggle('active');
+  function toggleRow(element) {
+    const row = element.closest('tr').nextElementSibling;
+    if (row) {
+      row.classList.toggle('hidden');
+    }
   }
 </script>
 </html>
