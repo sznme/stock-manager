@@ -9,6 +9,7 @@
       width: 250px;
       position: fixed;
       left: -250px;
+      transition: left 0.3s, margin-left 0.3s;
       top: 0;
       height: 100%;
       background: #f9f9f9;
@@ -33,20 +34,21 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 p-6">
-  <div class="max-w-full mx-auto">
+  <div class="max-w-full mx-auto ml-0 transition-margin">
     <button class="toggle-btn" onclick="toggleSidebar()">Toggle Sidebar</button>
     <h1 class="text-2xl font-semibold mb-4">Stock Manager Dashboard</h1>
 
     <!-- Search Bar -->
     <div class="sidebar" id="sidebar">
-        <ul>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Warehouses</a></li>
-            <li><a href="#">Users</a></li>
+        <ul class="space-y-4 p-4">
+            <li><a href="#" class="flex items-center text-gray-700 hover:text-blue-600"><i class="fas fa-cog mr-2"></i>Settings</a></li>
+            <li><a href="#" class="flex items-center text-gray-700 hover:text-blue-600"><i class="fas fa-building mr-2"></i>Warehouses</a></li>
+            <li><a href="#" class="flex items-center text-gray-700 hover:text-blue-600"><i class="fas fa-users mr-2"></i>Users</a></li>
         </ul>
     </div>
     <div class="mb-4">
       <input
+      class="ml-250"
         type="text"
         placeholder="Search by Product Name or SKU"
         class="w-full p-3 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -172,6 +174,7 @@
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     sidebar.classList.toggle('active');
+    document.querySelector('.transition-margin').classList.toggle('ml-250');
   }
 </script>
 </html>
